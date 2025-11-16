@@ -1,76 +1,42 @@
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'gitLabConfig' defined in URL [jar:file:/C:/Users/Dev04/.m2/repository/com/arabbank/kyc/kyc-commons-lib/1.5.7-SNAPSHOT/kyc-commons-lib-1.5.7-20250824.095040-5.jar!/com/arabbank/kyc/commons/lib/configuration/gitlab/GitLabConfig.class]: Unexpected exception during bean creation
-	
+import java.util.HashMap;
 
+@Configuration
+@RequiredArgsConstructor
+public class DatabaseConfiguration {
 
-Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'git.url' in value "${git.url}"
-	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180) ~[spring-core-6.1.1.jar:6.1.1]
-	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-6.1.1.jar:6.1.1]
-	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239) ~[spring-core-6.1.1.jar:6.1.1]
-	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-6.1.1.jar:6.1.1]
-	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:200) ~[spring-context-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:921) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1372) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1348) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:911) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:789) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:241) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1356) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.
+	private final ConfigReader configReader;
 
+	@Bean
+	public DataSource dataSource() throws Exception {
+		String url = configReader.getProperty("database.kyc.connection.url");
+		String userName = configReader.getProperty("database.kyc.connection.username");
+		String password = configReader.getProperty("database.kyc.connection.password");
+		int max_size = Integer.parseInt(configReader.getProperty("database.kyc.max_size"));
+		int timeout = Integer.parseInt(configReader.getProperty("database.kyc.timeout"));
+		HikariConfig hikariConfig = new HikariConfig();
+		hikariConfig.setDriverClassName("oracle.jdbc.OracleDriver");
+		hikariConfig.setJdbcUrl(url);
+		hikariConfig.setUsername(userName);
+		hikariConfig.setPassword(password);
+		hikariConfig.setMaximumPoolSize(max_size);
+		hikariConfig.setIdleTimeout(timeout);
+		return new HikariDataSource(hikariConfig);
+
+	}
+
+	@Bean
+	public EntityManagerFactoryBuilder entityManagerFactoryBuilder(JpaVendorAdapter jpaVendorAdapter) {
+		return new EntityManagerFactoryBuilder(jpaVendorAdapter,new HashMap<>(),null) ;
+
+	}
+}
 
 
 Description:
 
-Parameter 0 of method sourceEntityManagerFactory in com.arabbank.kyc.commons.lib.configuration.UtilConfiguration required a bean of type 'org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder' that could not be found.
+Parameter 0 of method entityManagerFactoryBuilder in com.arabbank.configuriation.DatabaseConfiguration required a bean of type 'org.springframework.orm.jpa.JpaVendorAdapter' that could not be found.
 
 
 Action:
 
-Consider defining a bean of type 'org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder' in your configuration.
-
-
-package com.arabbank.kyc.commons.lib.configuration;
-
-import com.arabbank.kyc.commons.lib.configuration.gitlab.ConfigReader;
-import com.arabbank.kyc.commons.lib.util.DataBaseConfigurationHelper;
-import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
-
-@Configuration
-@EnableJpaRepositories(
-    basePackages = {"com.arabbank.kyc.commons.lib.repository", "com.arabbank.kyc.repository.util"},
-    entityManagerFactoryRef = "utilEntityManagerFactory",
-    transactionManagerRef = "utilTransactionManager"
-)
-public class UtilConfiguration {
-    private final ConfigReader configReader;
-
-    @Bean({"utilDataSource"})
-    public DataSource utilDataSource() throws Exception {
-        return DataBaseConfigurationHelper.createDataSource(this.configReader, "util");
-    }
-
-    @Bean(
-        name = {"utilEntityManagerFactory"}
-    )
-    public LocalContainerEntityManagerFactoryBean sourceEntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("utilDataSource") DataSource dataSource) throws Exception {
-        return DataBaseConfigurationHelper.createEntityManagerFactory(builder, dataSource, "com.arabbank.kyc.commons.lib.model.entity.util,com.arabbank.kyc.model.entity.util", "util");
-    }
-
-    @Bean(
-        name = {"utilTransactionManager"}
-    )
-    public PlatformTransactionManager sourceTransactionManager(@Qualifier("utilEntityManagerFactory") LocalContainerEntityManagerFactoryBean entityManagerFactory) throws Exception {
-        return DataBaseConfigurationHelper.createTransactionManager(entityManagerFactory);
-    }
-
-    public UtilConfiguration(final ConfigReader configReader) {
-        this.configReader = configReader;
-    }
-}
+Consider defining a bean of type 'org.springframework.orm.jpa.JpaVendorAdapter' in your configuration.
