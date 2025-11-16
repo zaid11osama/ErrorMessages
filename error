@@ -1,0 +1,2 @@
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'gitLabConfig' defined in URL [jar:file:/C:/Users/Dev04/.m2/repository/com/arabbank/kyc/kyc-commons-lib/1.5.7-SNAPSHOT/kyc-commons-lib-1.5.7-20250824.095040-5.jar!/com/arabbank/kyc/commons/lib/configuration/gitlab/GitLabConfig.class]: Unexpected exception during bean creation
+	
