@@ -27,3 +27,50 @@ Parameter 0 of method sourceEntityManagerFactory in com.arabbank.kyc.commons.lib
 Action:
 
 Consider defining a bean of type 'org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder' in your configuration.
+
+
+package com.arabbank.kyc.commons.lib.configuration;
+
+import com.arabbank.kyc.commons.lib.configuration.gitlab.ConfigReader;
+import com.arabbank.kyc.commons.lib.util.DataBaseConfigurationHelper;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+
+@Configuration
+@EnableJpaRepositories(
+    basePackages = {"com.arabbank.kyc.commons.lib.repository", "com.arabbank.kyc.repository.util"},
+    entityManagerFactoryRef = "utilEntityManagerFactory",
+    transactionManagerRef = "utilTransactionManager"
+)
+public class UtilConfiguration {
+    private final ConfigReader configReader;
+
+    @Bean({"utilDataSource"})
+    public DataSource utilDataSource() throws Exception {
+        return DataBaseConfigurationHelper.createDataSource(this.configReader, "util");
+    }
+
+    @Bean(
+        name = {"utilEntityManagerFactory"}
+    )
+    public LocalContainerEntityManagerFactoryBean sourceEntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("utilDataSource") DataSource dataSource) throws Exception {
+        return DataBaseConfigurationHelper.createEntityManagerFactory(builder, dataSource, "com.arabbank.kyc.commons.lib.model.entity.util,com.arabbank.kyc.model.entity.util", "util");
+    }
+
+    @Bean(
+        name = {"utilTransactionManager"}
+    )
+    public PlatformTransactionManager sourceTransactionManager(@Qualifier("utilEntityManagerFactory") LocalContainerEntityManagerFactoryBean entityManagerFactory) throws Exception {
+        return DataBaseConfigurationHelper.createTransactionManager(entityManagerFactory);
+    }
+
+    public UtilConfiguration(final ConfigReader configReader) {
+        this.configReader = configReader;
+    }
+}
