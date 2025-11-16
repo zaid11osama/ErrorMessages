@@ -1,51 +1,9 @@
-package com.arabbank.kyc.commons.lib.util;
+Description:
 
-import com.arabbank.kyc.commons.lib.configuration.gitlab.ConfigReader;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import jakarta.persistence.EntityManagerFactory;
-import java.util.Objects;
-import javax.sql.DataSource;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
-
-public class DataBaseConfigurationHelper {
-    public static DataSource createDataSource(ConfigReader configReader, String configPrefix) throws Exception {
-        try {
-            HikariConfig config = new HikariConfig();
-            config.setJdbcUrl(configReader.getProperty(configPrefix.concat(".hikari.jdbcUrl")));
-            config.setUsername(configReader.getProperty(configPrefix.concat(".hikari.username")));
-            config.setPassword(configReader.getDecryptedProperty(configPrefix.concat(".hikari.password")));
-            config.setDriverClassName("oracle.jdbc.OracleDriver");
-            config.addDataSourceProperty("v$session.program", configReader.getAppName());
-            config.setMinimumIdle(Integer.parseInt(configReader.getProperty("connection.min_size")));
-            config.setMaximumPoolSize(Integer.parseInt(configReader.getProperty("connection.max_size")));
-            config.setConnectionTimeout((long)Integer.parseInt(configReader.getProperty("connection.timeoutInMileSec")));
-            config.setIdleTimeout((long)Integer.parseInt(configReader.getProperty("connection.idealTimeoutInMileSec")));
-            return new HikariDataSource(config);
-        } catch (Exception e) {
-            throw new Exception("Failed to create " + configPrefix + " DataSource", e);
-        }
-    }
-
-it fails here in  config.setMinimumIdle(Integer.parseInt(configReader.getProperty("connection.min_size")));
-
-Caused by: java.lang.NumberFormatException: Cannot parse null string
-	at java.base/java.lang.Integer.parseInt(Integer.java:550) ~[na:na]
-	at java.base/java.lang.Integer.parseInt(Integer.java:685) ~[na:na]
-	at com.arabbank.kyc.commons.lib.util.DataBaseConfigurationHelper.createDataSource(DataBaseConfigurationHelper.java:32) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
-	... 134 common frames omitted
+Parameter 0 of constructor in com.arabbank.service.GraphQlService required a bean of type 'com.arabbank.repositorie.NameRepository' that could not be found.
 
 
-even I do this 
+Action:
 
-@ComponentScan(
-		excludeFilters = {
-				@ComponentScan.Filter(
-						type = FilterType.REGEX,
-						pattern = "com\\.arabbank\\.kyc\\.commons\\.lib\\.configuration\\..*"
-				)
-		}
-)
+Consider defining a bean of type 'com.arabbank.repositorie.NameRepository' in your configuration.
+
