@@ -1,9 +1,7 @@
-Description:
-
-Parameter 0 of constructor in com.arabbank.service.GraphQlService required a bean of type 'com.arabbank.repositorie.NameRepository' that could not be found.
+Parameter 0 of constructor in com.arabbank.service.GraphQlService required a bean named 'entityManagerFactory' that could not be found.
 
 
 Action:
 
-Consider defining a bean of type 'com.arabbank.repositorie.NameRepository' in your configuration.
+Consider defining a bean named 'entityManagerFactory' in your configuration.
 
