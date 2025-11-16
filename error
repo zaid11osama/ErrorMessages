@@ -1,3 +1,16 @@
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'utilEntityManagerFactory' defined in class path resource [com/arabbank/kyc/commons/lib/configuration/UtilConfiguration.class]: Unsatisfied dependency expressed through method 'sourceEntityManagerFactory' parameter 1: Error creating bean with name 'utilDataSource' defined in class path resource [com/arabbank/kyc/commons/lib/configuration/UtilConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'utilDataSource' threw exception with message: Failed to create util DataSource
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:802) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1166) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365) ~[spring-beans-6.1.1.jar:6.1.1]
+	... 100 common frames omitted
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'utilDataSource' defined in class path resource [com/arabbank/kyc/commons/lib/configuration/UtilConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'utilDataSource' threw exception with message: Failed to create util DataSource
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:655) ~[spring-beans-6.1.1.jar:6.1.1]
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:489) ~[spring-beans-6.1.1.jar:6.1.1]
@@ -22,7 +35,7 @@ Caused by: org.springframework.beans.BeanInstantiationException: Failed to insta
 Caused by: java.lang.Exception: Failed to create util DataSource
 	at com.arabbank.kyc.commons.lib.util.DataBaseConfigurationHelper.createDataSource(DataBaseConfigurationHelper.java:38) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
 	at com.arabbank.kyc.commons.lib.configuration.UtilConfiguration.utilDataSource(UtilConfiguration.java:34) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
-	at com.arabbank.kyc.commons.lib.configuration.UtilConfiguration$$SpringCGLIB$$0.CGLIB$utilDataSource$2(<generated>) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
+	at com.arabbank.kyc.commons.lib.configuration.UtilConfiguration$$SpringCGLIB$$0.CGLIB$utilDataSource$0(<generated>) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
 	at com.arabbank.kyc.commons.lib.configuration.UtilConfiguration$$SpringCGLIB$$FastClass$$1.invoke(<generated>) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258) ~[spring-core-6.1.1.jar:6.1.1]
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-6.1.1.jar:6.1.1]
