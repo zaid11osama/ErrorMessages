@@ -1,3 +1,8 @@
-
-java.lang.IllegalStateException: The following classes could not be excluded because they are not auto-configuration classes:
-	- com.arabbank.kyc.commons.lib.configuration.UtilConfiguration
+@ComponentScan(
+    excludeFilters = {
+        @ComponentScan.Filter(
+            type = FilterType.REGEX,
+            pattern = "com\\.arabbank\\.kyc\\.commons\\.lib\\.configuration\\.UtilConfiguration"
+        )
+    }
+)
