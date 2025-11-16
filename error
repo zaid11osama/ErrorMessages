@@ -16,3 +16,14 @@ Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'gi
 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:241) ~[spring-beans-6.1.1.jar:6.1.1]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1356) ~[spring-beans-6.1.1.jar:6.1.1]
 	at org.
+
+
+
+Description:
+
+Parameter 0 of method sourceEntityManagerFactory in com.arabbank.kyc.commons.lib.configuration.UtilConfiguration required a bean of type 'org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder' in your configuration.
