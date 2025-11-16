@@ -1,29 +1,3 @@
 
-public class DataBaseConfigurationHelper {
-    public static DataSource createDataSource(ConfigReader configReader, String configPrefix) throws Exception {
-        try {
-            HikariConfig config = new HikariConfig();
-            config.setJdbcUrl(configReader.getProperty(configPrefix.concat(".hikari.jdbcUrl")));
-            config.setUsername(configReader.getProperty(configPrefix.concat(".hikari.username")));
-            config.setPassword(configReader.getDecryptedProperty(configPrefix.concat(".hikari.password")));
-            config.setDriverClassName("oracle.jdbc.OracleDriver");
-            config.addDataSourceProperty("v$session.program", configReader.getAppName());
-            config.setMinimumIdle(Integer.parseInt(configReader.getProperty("connection.min_size")));
-            config.setMaximumPoolSize(Integer.parseInt(configReader.getProperty("connection.max_size")));
-            config.setConnectionTimeout((long)Integer.parseInt(configReader.getProperty("connection.timeoutInMileSec")));
-            config.setIdleTimeout((long)Integer.parseInt(configReader.getProperty("connection.idealTimeoutInMileSec")));
-            return new HikariDataSource(config);
-        } catch (Exception e) {
-            throw new Exception("Failed to create " + configPrefix + " DataSource", e);
-        }
-    }
-
-    public static LocalContainerEntityManagerFactoryBean createEntityManagerFactory(EntityManagerFactoryBuilder builder, DataSource dataSource, String entityPackages, String persistenceUnitName) {
-        String[] packageArray = entityPackages.split(",");
-        return builder.dataSource(dataSource).packages(packageArray).persistenceUnit(persistenceUnitName).build();
-    }
-
-    public static PlatformTransactionManager createTransactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
-        return new JpaTransactionManager((EntityManagerFactory)Objects.requireNonNull(entityManagerFactory.getObject()));
-    }
-}
+java.lang.IllegalStateException: The following classes could not be excluded because they are not auto-configuration classes:
+	- com.arabbank.kyc.commons.lib.configuration.UtilConfiguration
