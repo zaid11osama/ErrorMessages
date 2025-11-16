@@ -1,42 +1,13 @@
-import java.util.HashMap;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 
-@Configuration
-@RequiredArgsConstructor
-public class DatabaseConfiguration {
 
-	private final ConfigReader configReader;
-
-	@Bean
-	public DataSource dataSource() throws Exception {
-		String url = configReader.getProperty("database.kyc.connection.url");
-		String userName = configReader.getProperty("database.kyc.connection.username");
-		String password = configReader.getProperty("database.kyc.connection.password");
-		int max_size = Integer.parseInt(configReader.getProperty("database.kyc.max_size"));
-		int timeout = Integer.parseInt(configReader.getProperty("database.kyc.timeout"));
-		HikariConfig hikariConfig = new HikariConfig();
-		hikariConfig.setDriverClassName("oracle.jdbc.OracleDriver");
-		hikariConfig.setJdbcUrl(url);
-		hikariConfig.setUsername(userName);
-		hikariConfig.setPassword(password);
-		hikariConfig.setMaximumPoolSize(max_size);
-		hikariConfig.setIdleTimeout(timeout);
-		return new HikariDataSource(hikariConfig);
-
-	}
-
-	@Bean
-	public EntityManagerFactoryBuilder entityManagerFactoryBuilder(JpaVendorAdapter jpaVendorAdapter) {
-		return new EntityManagerFactoryBuilder(jpaVendorAdapter,new HashMap<>(),null) ;
-
-	}
+@Bean
+public JpaVendorAdapter jpaVendorAdapter() {
+    HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+    adapter.setShowSql(false);
+    adapter.setGenerateDdl(false);
+    adapter.setDatabase(Database.ORACLE);
+    return adapter;
 }
-
-
-Description:
-
-Parameter 0 of method entityManagerFactoryBuilder in com.arabbank.configuriation.DatabaseConfiguration required a bean of type 'org.springframework.orm.jpa.JpaVendorAdapter' that could not be found.
-
-
-Action:
-
-Consider defining a bean of type 'org.springframework.orm.jpa.JpaVendorAdapter' in your configuration.
