@@ -1,83 +1,51 @@
-... 58 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'apiLogRepository' defined in com.arabbank.kyc.commons.lib.repository.logging.ApiLogRepository defined in @EnableJpaRepositories declared on UtilConfiguration: Cannot resolve reference to bean 'jpaSharedEM_utilEntityManagerFactory' while setting bean property 'entityManager'
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1686) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1435) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1441) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1348) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:769) ~[spring-beans-6.1.1.jar:6.1.1]
-	... 75 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaSharedEM_utilEntityManagerFactory': Cannot resolve reference to bean 'utilEntityManagerFactory' while setting constructor argument
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:689) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:513) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1166) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365) ~[spring-beans-6.1.1.jar:6.1.1]
-	... 88 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'utilEntityManagerFactory' defined in class path resource [com/arabbank/kyc/commons/lib/configuration/UtilConfiguration.class]: Unsatisfied dependency expressed through method 'sourceEntityManagerFactory' parameter 1: Error creating bean with name 'utilDataSource' defined in class path resource [com/arabbank/kyc/commons/lib/configuration/UtilConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'utilDataSource' threw exception with message: Failed to create util DataSource
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:802) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1166) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365) ~[spring-beans-6.1.1.jar:6.1.1]
-	... 100 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'utilDataSource' defined in class path resource [com/arabbank/kyc/commons/lib/configuration/UtilConfiguration.class]: Failed to instantiate [javax.sql.DataSource]: Factory method 'utilDataSource' threw exception with message: Failed to create util DataSource
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:655) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:489) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1166) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:563) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1441) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1348) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:911) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:789) ~[spring-beans-6.1.1.jar:6.1.1]
-	... 110 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.sql.DataSource]: Factory method 'utilDataSource' threw exception with message: Failed to create util DataSource
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:178) ~[spring-beans-6.1.1.jar:6.1.1]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:651) ~[spring-beans-6.1.1.jar:6.1.1]
-	... 124 common frames omitted
-Caused by: java.lang.Exception: Failed to create util DataSource
-	at com.arabbank.kyc.commons.lib.util.DataBaseConfigurationHelper.createDataSource(DataBaseConfigurationHelper.java:38) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
-	at com.arabbank.kyc.commons.lib.configuration.UtilConfiguration.utilDataSource(UtilConfiguration.java:34) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
-	at com.arabbank.kyc.commons.lib.configuration.UtilConfiguration$$SpringCGLIB$$0.CGLIB$utilDataSource$2(<generated>) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
-	at com.arabbank.kyc.commons.lib.configuration.UtilConfiguration$$SpringCGLIB$$FastClass$$1.invoke(<generated>) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
-	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258) ~[spring-core-6.1.1.jar:6.1.1]
-	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-6.1.1.jar:6.1.1]
-	at com.arabbank.kyc.commons.lib.configuration.UtilConfiguration$$SpringCGLIB$$0.utilDataSource(<generated>) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:140) ~[spring-beans-6.1.1.jar:6.1.1]
-	... 125 common frames omitted
+package com.arabbank.kyc.commons.lib.util;
+
+import com.arabbank.kyc.commons.lib.configuration.gitlab.ConfigReader;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import jakarta.persistence.EntityManagerFactory;
+import java.util.Objects;
+import javax.sql.DataSource;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+
+public class DataBaseConfigurationHelper {
+    public static DataSource createDataSource(ConfigReader configReader, String configPrefix) throws Exception {
+        try {
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl(configReader.getProperty(configPrefix.concat(".hikari.jdbcUrl")));
+            config.setUsername(configReader.getProperty(configPrefix.concat(".hikari.username")));
+            config.setPassword(configReader.getDecryptedProperty(configPrefix.concat(".hikari.password")));
+            config.setDriverClassName("oracle.jdbc.OracleDriver");
+            config.addDataSourceProperty("v$session.program", configReader.getAppName());
+            config.setMinimumIdle(Integer.parseInt(configReader.getProperty("connection.min_size")));
+            config.setMaximumPoolSize(Integer.parseInt(configReader.getProperty("connection.max_size")));
+            config.setConnectionTimeout((long)Integer.parseInt(configReader.getProperty("connection.timeoutInMileSec")));
+            config.setIdleTimeout((long)Integer.parseInt(configReader.getProperty("connection.idealTimeoutInMileSec")));
+            return new HikariDataSource(config);
+        } catch (Exception e) {
+            throw new Exception("Failed to create " + configPrefix + " DataSource", e);
+        }
+    }
+
+it fails here in  config.setMinimumIdle(Integer.parseInt(configReader.getProperty("connection.min_size")));
+
 Caused by: java.lang.NumberFormatException: Cannot parse null string
 	at java.base/java.lang.Integer.parseInt(Integer.java:550) ~[na:na]
 	at java.base/java.lang.Integer.parseInt(Integer.java:685) ~[na:na]
 	at com.arabbank.kyc.commons.lib.util.DataBaseConfigurationHelper.createDataSource(DataBaseConfigurationHelper.java:32) ~[kyc-commons-lib-1.5.7-20250824.095040-5.jar:1.5.7-SNAPSHOT]
 	... 134 common frames omitted
+
+
+even I do this 
+
+@ComponentScan(
+		excludeFilters = {
+				@ComponentScan.Filter(
+						type = FilterType.REGEX,
+						pattern = "com\\.arabbank\\.kyc\\.commons\\.lib\\.configuration\\..*"
+				)
+		}
+)
