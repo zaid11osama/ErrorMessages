@@ -1,3 +1,5 @@
+Description:
+
 Parameter 0 of constructor in com.arabbank.service.GraphQlService required a bean named 'entityManagerFactory' that could not be found.
 
 
