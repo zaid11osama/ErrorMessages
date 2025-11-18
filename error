@@ -6,4 +6,3 @@ Parameter 0 of constructor in com.arabbank.service.GraphQlService required a bea
 Action:
 
 Consider defining a bean named 'entityManagerFactory' in your configuration.
-
