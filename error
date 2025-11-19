@@ -1,8 +1,31 @@
-Description:
+  @Bean
+    @Primary
+    public DataSource primaryDataSource() {
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName("oracle.jdbc.OracleDriver");
+        config.setJdbcUrl("jdbc:oracle:thin:@//HOST:PORT/SERVICE");
+        config.setUsername("USERNAME");
+        config.setPassword("PASSWORD");
+        return new HikariDataSource(config);
+    }
 
-Parameter 0 of constructor in com.arabbank.service.GraphQlService required a bean named 'entityManagerFactory' that could not be found.
+    @Bean
+    @Primary
+    public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(
+            EntityManagerFactoryBuilder builder,
+            @Qualifier("primaryDataSource") DataSource dataSource) {
 
+        return builder
+                .dataSource(dataSource)
+                .packages("com.arabbank.model")  // your entity package
+                .persistenceUnit("primary")
+                .build();
+    }
 
-Action:
+    @Bean
+    @Primary
+    public PlatformTransactionManager primaryTransactionManager(
+            @Qualifier("primaryEntityManagerFactory") LocalContainerEntityManagerFactoryBean entityManagerFactory) {
 
-Consider defining a bean named 'entityManagerFactory' in your configuration.
+        return new JpaTransactionManager(entityManagerFactory.getObject());
+    }
